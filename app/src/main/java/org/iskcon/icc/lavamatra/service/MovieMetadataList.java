@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentMap;
      Sets MediaModel
 */
 
-public class MovieMetadataList {
+public class MovieMetadataList extends AsyncTask<Void, Void, List<MediaModel>> {
     //TODO 1 : Get the movieMetadata and return a list of mediaModels to be set in the CategoryFragment adapter
     //Should use the repository service to fetch the movie Metadata from Youtube
     //The images has to be fetched into a bitmap and set in the movieModel. To do this we will use another repository for images.
@@ -40,45 +40,29 @@ public class MovieMetadataList {
 
     private static final String TAG = MovieMetadataList.class.getSimpleName();
     private Context context;
-
+    public AsyncResponse delegate = null;
     public MovieMetadataList(Context context) {
         this.context = context;
     }
 
-    //Run as an asyncTask
-    public List<MediaModel> getMoviesAsync() {
-        final ConcurrentMap<String, MediaModel> movieItemModels = new ConcurrentHashMap<>();
-        List<MediaModel> myMediaModels = new ArrayList<>();
-        new AsyncTask<Void, Void, List<MediaModel>>() {
 
-            @Override
-            protected List<MediaModel> doInBackground(Void... params) {
-                YoutubeConnector yc = new YoutubeConnector(context);
-                List<MediaModel> mediaModels = new ArrayList<>();
-                List<MovieItemModel> newMovieItemModels = yc.getMovieItems();
-                int i = 0;
-                for (MovieItemModel movieItemModel : newMovieItemModels) {
-                    MediaModel mediaModel = new MediaModel();
-                    mediaModel.setMovieItemModel(movieItemModel);
-                    mediaModels.add(mediaModel);
-                }
-                for (MediaModel mediaModel : mediaModels) {
-                    i++;
-                    movieItemModels.put(String.valueOf(i), mediaModel);
-                    LogHelper.log(TAG, "debug", "MovieItemModel in AsyncTask. Found - " + mediaModel);
-                }
-
-                return mediaModels;
-            }
-
-            @Override
-            protected void onPostExecute(List<MediaModel> mediaModelList) {
-                LogHelper.log(TAG, "debug", "Successfully Executed  the AsyncTask to fetch youtube data");
-            }
-        }.execute();
-
-        return myMediaModels;
-
+    @Override
+    protected List<MediaModel> doInBackground(Void... params) {
+        YoutubeConnector yc = new YoutubeConnector(context);
+        List<MediaModel> mediaModels = new ArrayList<>();
+        List<MovieItemModel> newMovieItemModels = yc.getMovieItems();
+        for (MovieItemModel movieItemModel : newMovieItemModels) {
+            MediaModel mediaModel = new MediaModel();
+            mediaModel.setMovieItemModel(movieItemModel);
+            mediaModels.add(mediaModel);
+            LogHelper.log(TAG, "debug", "The mediaModel in AsyncTask is - " + mediaModel);
+        }
+        return mediaModels;
     }
 
+    @Override
+    protected void onPostExecute(List<MediaModel> mediaModelList) {
+        LogHelper.log(TAG, "debug", "Calling processFinish()");
+        delegate.processFinish(mediaModelList);
+    }
 }

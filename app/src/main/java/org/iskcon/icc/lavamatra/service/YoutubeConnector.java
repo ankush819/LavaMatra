@@ -98,7 +98,7 @@ public class YoutubeConnector {
                 MovieItemModel itemModel = new MovieItemModel();
                 itemModel.setTitle(playlistItem.getSnippet().getTitle());
                 itemModel.setMovieId(playlistItem.getId());
-                itemModel.setThumbnailUrl(playlistItem.getSnippet().getThumbnails().getDefault().getUrl());
+                itemModel.setThumbnailUrl(playlistItem.getSnippet().getThumbnails().getHigh().getUrl());
                 items.add(itemModel);
             }
             return items;

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import org.iskcon.icc.lavamatra.Model.MediaModel;
 import org.iskcon.icc.lavamatra.R;
 import org.iskcon.icc.lavamatra.categories.adapter.CategoryListRecyclerAdapter;
+import org.iskcon.icc.lavamatra.service.AsyncResponse;
 import org.iskcon.icc.lavamatra.service.MovieMetadataList;
 import org.iskcon.icc.lavamatra.util.AsyncTaskTest;
 import org.iskcon.icc.lavamatra.util.LogHelper;
@@ -25,13 +26,15 @@ import java.util.List;
  * Created by Ankush on 24-05-2017.
  */
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements AsyncResponse {
 
     private static final String TAG = CategoryFragment.class.getSimpleName();
     private ArrayList<MediaModel> arrayList;
     public static CategoryFragment newInstance() {
         return new CategoryFragment();
     }
+    private RecyclerView adapterTestListView;
+    private CategoryListRecyclerAdapter categoryListRecyclerAdapter;
 
     @Nullable
     @Override
@@ -45,15 +48,11 @@ public class CategoryFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.adapter_test, container, false);
         arrayList = new ArrayList<>();
 
-        RecyclerView adapterTestListView = (RecyclerView) rootView.findViewById(R.id.adapterTest);
+        adapterTestListView = (RecyclerView) rootView.findViewById(R.id.adapterTest);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         adapterTestListView.setLayoutManager(layoutManager);
-        CategoryListRecyclerAdapter categoryListRecyclerAdapter =
-                new CategoryListRecyclerAdapter(getContext(), arrayList);
-        adapterTestListView.setAdapter(categoryListRecyclerAdapter);
+        categoryListRecyclerAdapter = new CategoryListRecyclerAdapter(getContext(), arrayList);
 
-        //AsyncTaskTest asyncTaskTest = new AsyncTaskTest();
-        //asyncTaskTest.execute(1, 2, 3);
         return rootView;
     }
 
@@ -62,9 +61,16 @@ public class CategoryFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         LogHelper.log(TAG, "info", "onActivityStarted() called");
         MovieMetadataList movieMetadataList = new MovieMetadataList(getContext());
-        for (MediaModel mediaModel : movieMetadataList.getMoviesAsync()) {
-            LogHelper.log(TAG, "debug", "MediaModel found - " + mediaModel);
+        movieMetadataList.delegate = this;
+        movieMetadataList.execute();
+    }
+
+    @Override
+    public void processFinish(List<MediaModel> mediaModelList) {
+        for (MediaModel mediaModel : mediaModelList) {
+            LogHelper.log(TAG, "debug", "processFinish() and the mediaModel is - " + mediaModel);
             arrayList.add(mediaModel);
         }
+        adapterTestListView.setAdapter(categoryListRecyclerAdapter);
     }
 }
