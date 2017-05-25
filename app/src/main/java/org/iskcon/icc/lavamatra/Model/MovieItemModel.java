@@ -7,14 +7,18 @@ import java.io.Serializable;
  */
 
 public class MovieItemModel implements Serializable {
-    String movieId;
-    String title;
-    String imageUri;
+    private String movieId;
+    private String title;
+    private String thumbnailUrl;
 
-    public MovieItemModel(String imageUri, String title, String movieId) {
-        this.imageUri = imageUri;
+    public MovieItemModel(String thumbnailUrl, String title, String movieId) {
+        this.thumbnailUrl = thumbnailUrl;
         this.title = title;
         this.movieId = movieId;
+    }
+
+    public MovieItemModel() {
+
     }
 
     public void setMovieId(String movieId) {
@@ -29,12 +33,12 @@ public class MovieItemModel implements Serializable {
         this.title = title;
     }
 
-    public String getImageUri() {
-        return imageUri;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public String getMovieId() {

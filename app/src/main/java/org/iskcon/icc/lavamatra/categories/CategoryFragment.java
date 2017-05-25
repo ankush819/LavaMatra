@@ -14,6 +14,7 @@ import android.widget.ListView;
 import org.iskcon.icc.lavamatra.Model.MediaModel;
 import org.iskcon.icc.lavamatra.R;
 import org.iskcon.icc.lavamatra.categories.adapter.CategoryListRecyclerAdapter;
+import org.iskcon.icc.lavamatra.service.MovieMetadataList;
 import org.iskcon.icc.lavamatra.util.AsyncTaskTest;
 import org.iskcon.icc.lavamatra.util.LogHelper;
 
@@ -60,7 +61,10 @@ public class CategoryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         LogHelper.log(TAG, "info", "onActivityStarted() called");
-        arrayList.add(new MediaModel());
-        arrayList.add(new MediaModel());
+        MovieMetadataList movieMetadataList = new MovieMetadataList(getContext());
+        for (MediaModel mediaModel : movieMetadataList.getMoviesAsync()) {
+            LogHelper.log(TAG, "debug", "MediaModel found - " + mediaModel);
+            arrayList.add(mediaModel);
+        }
     }
 }

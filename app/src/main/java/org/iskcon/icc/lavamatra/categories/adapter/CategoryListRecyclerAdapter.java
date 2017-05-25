@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import org.iskcon.icc.lavamatra.Model.MediaModel;
 import org.iskcon.icc.lavamatra.R;
 import org.iskcon.icc.lavamatra.util.LogHelper;
@@ -48,7 +50,9 @@ public class CategoryListRecyclerAdapter extends RecyclerView.Adapter<CategoryLi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         LogHelper.log(TAG, "debug", "onBindViewHolder() called");
-        holder.imageView.setImageResource(R.drawable.jps_test);
+        //holder.imageView.setImageResource(R.drawable.jps_test);
+        MediaModel mediaModel = mediaModelList.get(position);
+        Picasso.with(context).load(mediaModel.getMovieItemModel().getThumbnailUrl()).into(holder.imageView);
     }
 
     @Override
