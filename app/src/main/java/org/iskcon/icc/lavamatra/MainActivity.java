@@ -14,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //TODO : Need to write classes for welcome screen and one time registration screen. The successive calls will be made from respective classes
+        //TODO : Write a class which handles the menu for categories, that will be the home page.
+        //TODO : Refactor this class to be the welcome screen class
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, CategoryFragment.newInstance())
                 .commit();
