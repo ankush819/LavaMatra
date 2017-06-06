@@ -28,7 +28,9 @@ import java.util.List;
  */
 
 /*
-
+    Connects to Youtube and fetches the list
+    Called by MovieMetadataList class
+    Should use a repository in between MovieMetadataList and YoutubeConnector for code scalability
  */
 
 //TODO : Have a builder template method for youtube query which all methods can use
@@ -84,10 +86,10 @@ public class YoutubeConnector {
     //We need a different model to handle multiple playlists.
     //Can convert this method to getMovieItemsOfPlayList later on and have a public method call this.
     public List<MovieItemModel> getMovieItems() {
-        PlaylistItemListResponse response = null;
+        PlaylistItemListResponse response;
         YouTube.PlaylistItems.List playlistItems;
         List<MovieItemModel> items = new ArrayList<>();
-        List<PlaylistItem> results = null;
+        List<PlaylistItem> results;
         try {
             playlistItems = youTube.playlistItems().list("snippet"); //TODO Place these strings as static above
             playlistItems.setKey(GOOGLE_API_KEY);

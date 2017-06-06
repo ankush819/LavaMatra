@@ -8,15 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import org.iskcon.icc.lavamatra.Model.MediaModel;
 import org.iskcon.icc.lavamatra.R;
 import org.iskcon.icc.lavamatra.categories.adapter.CategoryListRecyclerAdapter;
 import org.iskcon.icc.lavamatra.service.AsyncResponse;
 import org.iskcon.icc.lavamatra.service.MovieMetadataList;
-import org.iskcon.icc.lavamatra.util.AsyncTaskTest;
 import org.iskcon.icc.lavamatra.util.LogHelper;
 
 import java.util.ArrayList;
@@ -33,7 +30,7 @@ public class CategoryFragment extends Fragment implements AsyncResponse {
     public static CategoryFragment newInstance() {
         return new CategoryFragment();
     }
-    private RecyclerView adapterTestListView;
+    private RecyclerView recyclerListView;
     private CategoryListRecyclerAdapter categoryListRecyclerAdapter;
 
     @Nullable
@@ -45,12 +42,12 @@ public class CategoryFragment extends Fragment implements AsyncResponse {
         //TODO 1 : Inflate a simple view which contains a list of all the categories
         //TODO 2 : Query the model to get the list of media and send it to adapters to set it in the view
         //TODO 3 : Set onClickListeners
-        View rootView = inflater.inflate(R.layout.adapter_test, container, false);
+        View rootView = inflater.inflate(R.layout.recycler_movie_list, container, false);
         arrayList = new ArrayList<>();
 
-        adapterTestListView = (RecyclerView) rootView.findViewById(R.id.adapterTest);
+        recyclerListView = (RecyclerView) rootView.findViewById(R.id.adapterTest);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        adapterTestListView.setLayoutManager(layoutManager);
+        recyclerListView.setLayoutManager(layoutManager);
         categoryListRecyclerAdapter = new CategoryListRecyclerAdapter(getContext(), arrayList);
 
         return rootView;
@@ -71,6 +68,6 @@ public class CategoryFragment extends Fragment implements AsyncResponse {
             LogHelper.log(TAG, "debug", "processFinish() and the mediaModel is - " + mediaModel);
             arrayList.add(mediaModel);
         }
-        adapterTestListView.setAdapter(categoryListRecyclerAdapter);
+        recyclerListView.setAdapter(categoryListRecyclerAdapter);
     }
 }

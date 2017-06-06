@@ -7,22 +7,19 @@ import com.google.api.services.youtube.YouTube;
 
 import org.iskcon.icc.lavamatra.Model.MediaModel;
 import org.iskcon.icc.lavamatra.Model.MovieItemModel;
-import org.iskcon.icc.lavamatra.util.AsyncTaskTest;
 import org.iskcon.icc.lavamatra.util.LogHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+
 
 /**
  * Created by Ankush on 25-05-2017.
  */
 
 /*
-    To fetch movieMetadata from Youtube. The same model is applicable for image fetch from a web resource.
-    MovieMetadataList ---> YoutubeDataAPI
+    To fetch movieMetadata from Youtube.
+    MovieMetadataList ---> YoutubeDataAPI (YoutubeConnector)
          |      |             |
          |      |             \------> Sets the list of movieItemModel for a Category/PlayList (FIX IT for all Categories)
          |      |
