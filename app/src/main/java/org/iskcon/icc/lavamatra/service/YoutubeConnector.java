@@ -34,6 +34,8 @@ import java.util.List;
  */
 
 //TODO : Have a builder template method for youtube query which all methods can use
+//TODO : Handle the error cases ex : playlist or channel doesn't exist etc..
+
 public class YoutubeConnector {
 
     private static final String TAG = YoutubeConnector.class.getSimpleName();
