@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import org.iskcon.icc.lavamatra.util.Constants;
 import org.iskcon.icc.lavamatra.util.LogHelper;
 
 /**
@@ -20,6 +21,7 @@ public class SplashScreen extends AppCompatActivity {
     private static final String TAG = SplashScreen.class.getSimpleName();
     private SharedPreferences sharedPreferences;
     private Intent intent;
+    private String registrationSharedPrefName = Constants.REGISTRATION_SHARED_PREF_NAME;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean registrationComplete = sharedPreferences.getBoolean("complete", false);
+        boolean registrationComplete = sharedPreferences.getBoolean(registrationSharedPrefName, false);
 
         if (registrationComplete == true) {
             intent = new Intent(SplashScreen.this, MainActivity.class);
@@ -45,6 +47,7 @@ public class SplashScreen extends AppCompatActivity {
                 //TODO : Add code to see whether the user is using the app for the first time and based on it call the registration class or the main activity
                 //TODO : Back button during splash works BUT the splash timeout is still getting executed. FIX IT.
                 //TODO : I press back from MainActivity and come back again, I get welcomed by the Splash and register screen. FIX IT.
+                //Even RISE app has the same problem as the above to do. Maybe it can be ignored for now.
                 startActivity(intent);
                 finish();
             }

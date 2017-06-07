@@ -9,4 +9,5 @@ public class Constants {
     //TODO 1 : Put the playList Names here.
     //Each playlist belongs to a particular category.
     //In the private channel I need to create the playList in the same way.
+    public static final String REGISTRATION_SHARED_PREF_NAME = "completed";
 }
