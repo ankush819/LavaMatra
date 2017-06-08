@@ -2,6 +2,7 @@ package org.iskcon.icc.lavamatra.service;
 
 import android.text.TextUtils;
 
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,7 +41,20 @@ public class FirebaseDatabaseUpdate {
         }
 
         User user = new User(fullName, initiatedName, email, place, phone);
-        firebaseDatabase.child(userId).setValue(user);
+        LogHelper.log(TAG, "debug", "Setting the value in the firebase database");
+        firebaseDatabase.child(userId).setValue(user, new DatabaseReference.CompletionListener() {
+
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
+                    LogHelper.log(TAG, "debug", "Data written successfully to firebase");
+                }
+            }
+        });
+
+        //TODO : Add a completion callback, have an interface and let the Register User activity implement that method. That will call the right intent.
+        //The above to do is to reduce the visible latency when the user sees the video list..
+        //See if it is really needed if we are just displaying a static menu. Figure out the best practices.
     }
 
     private void updateUser(String fullName, String initiatedName, String email, String place, String phone) {

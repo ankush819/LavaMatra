@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.iskcon.icc.lavamatra.service.FirebaseDatabaseUpdate;
 import org.iskcon.icc.lavamatra.util.Constants;
@@ -46,25 +47,26 @@ public class RegisterUser extends AppCompatActivity {
         registerButton = (Button) findViewById(R.id.registerButton);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RegisterUser.this);
-        completed = sharedPreferences.getBoolean(registrationSharedPrefName, false); //TODO : Put completed preference name in config file
+        completed = sharedPreferences.getBoolean(registrationSharedPrefName, false);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fullName = inputFullName.getText().toString();
-                initiatedName = inputInitiatedName.getText().toString();
-                email = inputEmail.getText().toString();
-                phone = inputPhone.getText().toString();
-                place = inputPlace.getText().toString();
+                fullName = inputFullName.getText().toString().trim();
+                initiatedName = inputInitiatedName.getText().toString().trim();
+                email = inputEmail.getText().toString().trim();
+                phone = inputPhone.getText().toString().trim();
+                place = inputPlace.getText().toString().trim();
 
-                sanitizeInput();
+                if(!sanitizeInput()) return;
 
                 if (!completed) {
-                    LogHelper.log(TAG, "debug", "USer has not registered. Updating firebase DB with user info.");
+                    LogHelper.log(TAG, "debug", "User has not registered. Updating firebase DB with user info.");
                     FirebaseDatabaseUpdate fbUpdate = new FirebaseDatabaseUpdate();
                     fbUpdate.writeNewUser(fullName, initiatedName, email, place, phone); //TODO : Update only if shared preferences is not set
                     updateSharedPreferences();
                 }
+                LogHelper.log(TAG, "debug", "Starting activity MainActivity from RegisterUser class");
                 intent = new Intent(RegisterUser.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -79,16 +81,22 @@ public class RegisterUser extends AppCompatActivity {
         editor.commit();
     }
 
-    private void sanitizeInput() {
+    private boolean sanitizeInput() {
         //TODO : Do all sanity checks of the form data here
-        //Dummy for now
         if (TextUtils.isEmpty(fullName)) {
-            fullName = "DUMMY_USER";
-            email = "xyz@gmail.com";
-            initiatedName = "DASANU DAS";
-            phone = "9000000000";
-            place = "BANGALORE";
+            Toast.makeText(getApplicationContext(), "Please enter your full name", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(place)) {
+            Toast.makeText(getApplicationContext(), "Please enter your place", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(email) || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            return false;
         }
         LogHelper.log(TAG, "debug", "The user name is " + fullName);
+        return true;
     }
 }

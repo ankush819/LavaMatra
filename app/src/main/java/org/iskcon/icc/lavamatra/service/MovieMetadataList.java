@@ -19,6 +19,7 @@ import java.util.List;
 
 /*
     To fetch movieMetadata from Youtube.
+    TODO (for PHASE 2) : This class should not know where the videos are coming from. Abstract it with a repository video service.
     MovieMetadataList ---> YoutubeDataAPI (YoutubeConnector)
          |      |             |
          |      |             \------> Sets the list of movieItemModel for a Category/PlayList (FIX IT for all Categories)
