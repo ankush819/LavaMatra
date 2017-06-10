@@ -2,6 +2,7 @@ package org.iskcon.icc.lavamatra.categories;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,8 +41,10 @@ public class DisplayCategoriesActivity extends AppCompatActivity {
         CategoryProvider categoryProvider = new CategoryProvider(getApplicationContext());
         categories = categoryProvider.getCategories(); //TODO : Fill up categories with helper method from category provider
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         LogHelper.log(TAG, "debug", "The categories are " + categories);
-        categoryAdapter = new CategoryAdapter(getApplicationContext(), categories);
+        categoryAdapter = new CategoryAdapter(getApplicationContext(), fragmentManager, categories);
         recyclerView.setAdapter(categoryAdapter);
     }
 }

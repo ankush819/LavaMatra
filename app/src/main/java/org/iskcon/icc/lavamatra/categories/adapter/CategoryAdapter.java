@@ -1,6 +1,7 @@
 package org.iskcon.icc.lavamatra.categories.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.iskcon.icc.lavamatra.MainActivity;
 import org.iskcon.icc.lavamatra.R;
 import org.iskcon.icc.lavamatra.categories.CategoryFragment;
 import org.iskcon.icc.lavamatra.categories.model.Category;
@@ -28,10 +30,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     private ArrayList<Category> categories;
     private Context context;
+    private FragmentManager fragmentManager;
 
-    public CategoryAdapter(Context context, ArrayList<Category> categories) {
+    public CategoryAdapter(Context context, FragmentManager fragmentManager, ArrayList<Category> categories) {
         this.categories = categories;
         this.context = context;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -44,7 +48,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         LogHelper.log(TAG, "debug", "onBindViewHolder() called");
         Category category = categories.get(position);
         //TODO : Set the imageResource from path here
@@ -57,10 +61,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             public void onClick(View v) {
                 LogHelper.log(TAG, "debug", "Category was clicked!");
                 //TODO : Call Fragment Manager from here
-                //FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                //fragmentManager.beginTransaction()
-                //        .add(R.id.categoryLayout, CategoryFragment.newInstance())
-                //        .commit();
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent); // start Intent
             }
         });
     }
