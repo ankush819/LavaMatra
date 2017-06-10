@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.iskcon.icc.lavamatra.categories.DisplayCategoriesActivity;
 import org.iskcon.icc.lavamatra.service.FirebaseDatabaseUpdate;
 import org.iskcon.icc.lavamatra.util.Constants;
 import org.iskcon.icc.lavamatra.util.LogHelper;
@@ -67,7 +68,7 @@ public class RegisterUser extends AppCompatActivity {
                     updateSharedPreferences();
                 }
                 LogHelper.log(TAG, "debug", "Starting activity MainActivity from RegisterUser class");
-                intent = new Intent(RegisterUser.this, MainActivity.class);
+                intent = new Intent(RegisterUser.this, DisplayCategoriesActivity.class);
                 startActivity(intent);
                 finish();
             }

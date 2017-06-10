@@ -63,7 +63,7 @@ public class CategoryListRecyclerAdapter extends RecyclerView.Adapter<CategoryLi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView imageView;
+        ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.movieImage);

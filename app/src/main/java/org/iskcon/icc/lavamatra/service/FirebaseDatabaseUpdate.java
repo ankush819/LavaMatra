@@ -57,6 +57,7 @@ public class FirebaseDatabaseUpdate {
         //See if it is really needed if we are just displaying a static menu. Figure out the best practices.
     }
 
+    //TODO : Maybe a dummy method. See if it is needed, else remove.
     private void updateUser(String fullName, String initiatedName, String email, String place, String phone) {
         LogHelper.log(TAG, "debug", "Updating user for userId " + userId);
         firebaseDatabase.child(userId).child("fullName").setValue(fullName);

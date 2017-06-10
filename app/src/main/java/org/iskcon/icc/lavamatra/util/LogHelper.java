@@ -18,6 +18,9 @@ public class LogHelper {
             case "info":
                 Log.i(TAG, message);
                 break;
+            case "error":
+                Log.e(TAG, message);
+                break;
             default:
                 Log.v(TAG, message);
                 break;

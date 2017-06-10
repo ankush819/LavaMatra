@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import org.iskcon.icc.lavamatra.categories.DisplayCategoriesActivity;
 import org.iskcon.icc.lavamatra.util.Constants;
 import org.iskcon.icc.lavamatra.util.LogHelper;
 
@@ -34,7 +35,7 @@ public class SplashScreen extends AppCompatActivity {
         boolean registrationComplete = sharedPreferences.getBoolean(registrationSharedPrefName, false);
 
         if (registrationComplete == true) {
-            intent = new Intent(SplashScreen.this, MainActivity.class);
+            intent = new Intent(SplashScreen.this, DisplayCategoriesActivity.class);
             LogHelper.log(TAG, "info", "User already registered");
         } else {
             intent = new Intent(SplashScreen.this, RegisterUser.class);

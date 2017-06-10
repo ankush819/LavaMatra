@@ -1,0 +1,46 @@
+{
+  "categories": {
+    "category": [
+      {
+        "playlistName": "",
+        "displayName": "Chaitanya Lila",
+        "thumbnailRawPath": "dummy_1"
+      },
+      {
+        "playlistName": "",
+        "displayName": "Prabhupada Katha",
+        "thumbnailRawPath": "dummy_2"
+      },
+      {
+        "playlistName": "",
+        "displayName": "Krishna Katha",
+        "thumbnailRawPath": "dummy_3"
+      },
+      {
+        "playlistName": "",
+        "displayName": "Holy Dham",
+        "thumbnailRawPath": "dummy_4"
+      },
+      {
+        "playlistName": "",
+        "displayName": "Preaching activities",
+        "thumbnailRawPath": "dummy_1"
+      },
+      {
+        "playlistName": "",
+        "displayName": "Instructive Stories",
+        "thumbnailRawPath": "dummy_2"
+      },
+      {
+        "playlistName": "",
+        "displayName": "Bhakti Vriksa",
+        "thumbnailRawPath": "dummy_3"
+      },
+      {
+        "playlistName": "",
+        "displayName": "Compassion",
+        "thumbnailRawPath": "dummy_4"
+      }
+    ]
+  }
+}
