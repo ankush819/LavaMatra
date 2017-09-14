@@ -8,6 +8,10 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.iskcon.icc.lavamatra.authentication.LoginActivity;
+import org.iskcon.icc.lavamatra.authentication.RegisterUserActivity;
 import org.iskcon.icc.lavamatra.categories.DisplayCategoriesActivity;
 import org.iskcon.icc.lavamatra.util.Constants;
 import org.iskcon.icc.lavamatra.util.LogHelper;
@@ -22,6 +26,7 @@ public class SplashScreen extends AppCompatActivity {
     private static final String TAG = SplashScreen.class.getSimpleName();
     private SharedPreferences sharedPreferences;
     private Intent intent;
+    private FirebaseAuth auth;
     private String registrationSharedPrefName = Constants.REGISTRATION_SHARED_PREF_NAME;
 
     @Override
@@ -31,6 +36,17 @@ public class SplashScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
+        auth = FirebaseAuth.getInstance();
+
+        if (auth.getCurrentUser() != null){
+            intent = new Intent(SplashScreen.this, DisplayCategoriesActivity.class);
+            LogHelper.log(TAG, "info", "User already logged in");
+        } else {
+            intent = new Intent(SplashScreen.this, LoginActivity.class);
+            LogHelper.log(TAG, "info", "Proceeding for user login");
+        }
+
+        /** DELETE THIS CODE
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean registrationComplete = sharedPreferences.getBoolean(registrationSharedPrefName, false);
 
@@ -38,9 +54,9 @@ public class SplashScreen extends AppCompatActivity {
             intent = new Intent(SplashScreen.this, DisplayCategoriesActivity.class);
             LogHelper.log(TAG, "info", "User already registered");
         } else {
-            intent = new Intent(SplashScreen.this, RegisterUser.class);
+            intent = new Intent(SplashScreen.this, RegisterUserActivity.class);
             LogHelper.log(TAG, "info", "Proceeding for user registration");
-        }
+        } **/
 
         new Handler().postDelayed(new Runnable() {
             @Override

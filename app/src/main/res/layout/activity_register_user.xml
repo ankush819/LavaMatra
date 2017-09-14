@@ -37,6 +37,12 @@
                 android:layout_height="wrap_content"
                 android:hint="EMAIL ID"/>
             <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password"/>
+            <EditText
                 android:id="@+id/editPlace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,6 +57,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="REGISTER"/>
+            <Button
+                android:id="@+id/goToLoginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LOGIN"/>
+            <Button
+                android:id="@+id/resetPasswordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RESET PASSWORD"/>
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

@@ -31,6 +31,9 @@
 
         <activity android:name=".RegisterUser"/>
         <activity android:name=".categories.DisplayCategoriesActivity"/>
+        <activity android:name=".authentication.LoginActivity"/>
+        <activity android:name=".authentication.RegisterUserActivity"/>
+        <activity android:name=".authentication.ResetPasswordActivity"/>
     </application>
 
 </manifest>
