@@ -6,10 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
 
 import org.iskcon.icc.lavamatra.R;
 import org.iskcon.icc.lavamatra.categories.adapter.CategoryAdapter;
 import org.iskcon.icc.lavamatra.categories.model.Category;
+import org.iskcon.icc.lavamatra.navigation.HandleNavigationMenu;
 import org.iskcon.icc.lavamatra.util.LogHelper;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class DisplayCategoriesActivity extends AppCompatActivity {
     private GridLayoutManager gridLayoutManager;
     private CategoryAdapter categoryAdapter;
     private ArrayList<Category> categories;
+    private ListView navList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +36,10 @@ public class DisplayCategoriesActivity extends AppCompatActivity {
         LogHelper.log(TAG, "debug", "onCreate() called");
 
         setContentView(R.layout.activity_display_categories);
+
+        navList = (ListView) findViewById(R.id.navList);
+        HandleNavigationMenu handleNavigationMenu = new HandleNavigationMenu();
+        handleNavigationMenu.populateNavBar(DisplayCategoriesActivity.this, navList);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);

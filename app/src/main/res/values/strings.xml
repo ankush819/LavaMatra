@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Lava Matra</string>
+    <string name="app_name_login">Lava-Matra</string>
+    <string name="tag_name_login">sadhu-sanga</string>
+    <string name="second_tag_name_login">with Jayapataka Swami</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>

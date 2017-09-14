@@ -2,6 +2,7 @@ package org.iskcon.icc.lavamatra.authentication;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +49,18 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_login_user);
+
+        /** SET TEXT VIEW TO ROBOTO THIN **/
+        TextView appText = (TextView)findViewById(R.id.loginLogoName);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/roboto.light.ttf");
+        appText.setTypeface(custom_font);
+
+        TextView tagText = (TextView)findViewById(R.id.loginTag);
+        Typeface custom_font_tag_name = Typeface.createFromAsset(getAssets(),  "fonts/roboto.light-italic.ttf");
+        tagText.setTypeface(custom_font_tag_name);
+
+        TextView secondTagText = (TextView)findViewById(R.id.loginSecondTag);
+        secondTagText.setTypeface(custom_font);
 
         inputEmail = (EditText) findViewById(R.id.loginEmailBox);
         inputPassword = (EditText) findViewById(R.id.loginPasswordBox);
@@ -107,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter a valid email", Toast.LENGTH_SHORT).show();
             return false;
         }
-        LogHelper.log(TAG, "debug", "The user name is " + fullName);
+        LogHelper.log(TAG, "debug", "The user name is " + email);
         return true;
     }
 }
