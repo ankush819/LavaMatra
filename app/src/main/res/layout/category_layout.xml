@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:padding="15dp">
-    <!--
+
     grid items for RecyclerView
-    -->
+
     <ImageView
         android:id="@+id/categoryImage"
         android:layout_width="match_parent"
@@ -21,3 +21,4 @@
         android:textSize="20sp"
         android:textColor="#000" />
 </RelativeLayout>
+
