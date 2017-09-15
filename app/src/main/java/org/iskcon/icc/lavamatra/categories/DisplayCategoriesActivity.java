@@ -85,6 +85,14 @@ public class DisplayCategoriesActivity extends AppCompatActivity {
         categoryModel.setPlaylistName("PLAYLIST 1");
         list.add(categoryModel);
 
+        CategoryModel categoryModel2 = new CategoryModel();
+        categoryModel2.setPlaylistName("PLAYLIST 2");
+        list.add(categoryModel2);
+
+        CategoryModel categoryModel3 = new CategoryModel();
+        categoryModel3.setPlaylistName("PLAYLIST 3");
+        list.add(categoryModel3);
+
         categoryListAdapter = new CategoryListAdapter(this, list); //TODO : Replace this with what i have talked in above todo
         listView.setAdapter(categoryListAdapter);
 

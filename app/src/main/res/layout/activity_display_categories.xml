@@ -44,7 +44,9 @@
     <ListView
         android:id="@+id/categoryView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/register_screen_background"
+        android:divider="#00000000"/>
 
 </LinearLayout>
     <!-- Side navigation drawer UI

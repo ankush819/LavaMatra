@@ -14,6 +14,7 @@ import android.widget.TextView;
 import org.iskcon.icc.lavamatra.R;
 import org.iskcon.icc.lavamatra.categories.model.Category;
 import org.iskcon.icc.lavamatra.categories.model.CategoryModel;
+import org.iskcon.icc.lavamatra.util.LogHelper;
 
 import java.util.ArrayList;
 import java.util.zip.Inflater;
@@ -26,7 +27,7 @@ public class CategoryListAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<CategoryModel> categories;
-
+    private static final String TAG = CategoryListAdapter.class.getSimpleName();
 
     public CategoryListAdapter(Context context, ArrayList<CategoryModel> categories) {
         this.context = context;
@@ -63,6 +64,7 @@ public class CategoryListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        LogHelper.log(TAG, "debug", "My playlist name is " + categories.get(position).getPlaylistName());
         viewHolder.categoryTitle.setText(categories.get(position).getPlaylistName());
         return convertView;
     }
