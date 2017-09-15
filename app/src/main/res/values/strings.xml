@@ -4,5 +4,17 @@
     <string name="tag_name_login">sadhu-sanga</string>
     <string name="second_tag_name_login">with Jayapataka Swami</string>
     <string name="sign_up">Sign Up</string>
+    <string name="user_name">Name</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="user_place">Place</string>
+    <string name="user_phone">Phone</string>
     <string name="forgot_password">Forgot Password?</string>
+
+    <string-array name="relationship_values">
+        <item>Initiated Disciple</item>
+        <item>Sheltered Disciple</item>
+        <item>Aspiring Disciple</item>
+        <item>Well Wisher</item>
+    </string-array>
 </resources>

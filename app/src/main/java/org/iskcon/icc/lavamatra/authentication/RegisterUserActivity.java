@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,7 +36,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     private static final String TAG = RegisterUserActivity.class.getSimpleName();
     private SharedPreferences sharedPreferences;
     private boolean completed;
-    private EditText inputFullName, inputInitiatedName, inputEmail, inputPassword, inputPhone, inputPlace;
+    private EditText inputFullName, inputEmail, inputPassword, inputPhone, inputPlace;
+    private Spinner inputInitiatedName;
     private String fullName, initiatedName, email, password, phone, place;
     private Button registerButton, resetPasswordButton, loginButton;
     private Intent intent;
@@ -50,25 +52,20 @@ public class RegisterUserActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         inputFullName = (EditText) findViewById(R.id.editFullName);
-        inputInitiatedName = (EditText) findViewById(R.id.editInitiatedName);
+        inputInitiatedName = (Spinner) findViewById(R.id.editInitiatedName);
         inputEmail = (EditText) findViewById(R.id.editEmail);
         inputPassword = (EditText) findViewById(R.id.editPassword);
         inputPhone = (EditText) findViewById(R.id.editPhone);
         inputPlace = (EditText) findViewById(R.id.editPlace);
 
         registerButton = (Button) findViewById(R.id.registerButton);
-        resetPasswordButton = (Button) findViewById(R.id.resetPasswordButton);
+        //resetPasswordButton = (Button) findViewById(R.id.resetPasswordButton);
         loginButton = (Button) findViewById(R.id.goToLoginButton);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RegisterUserActivity.this);
         completed = sharedPreferences.getBoolean(registrationSharedPrefName, false);
         //TODO : Uncomment and see what is going wrong here
-        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RegisterUserActivity.this, ResetPasswordActivity.class));
-            }
-        });
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +79,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fullName = inputFullName.getText().toString().trim();
-                initiatedName = inputInitiatedName.getText().toString().trim();
+                initiatedName = String.valueOf(inputInitiatedName.getSelectedItem());
                 email = inputEmail.getText().toString().trim();
                 password = inputPassword.getText().toString().trim();
                 phone = inputPhone.getText().toString().trim();
